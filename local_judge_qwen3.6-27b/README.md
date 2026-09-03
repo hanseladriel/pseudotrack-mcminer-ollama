@@ -97,6 +97,18 @@ trustworthy — a judge reply that did not parse is scored, not errored.
 them into bags the way McMiner's own bag former does, mines each bag, and scores
 the result through the same two evaluators Run 1 uses.
 
+Before using compute resources, materialize an auditable manifest and the exact
+deterministic bag distribution without calling a model:
+
+```bash
+python scripts/prepare_correct_only.py
+```
+
+This writes ignored, reproducible artifacts under `artifacts/correct_only/`:
+the 96 applicability rows, 19 resolved unique programs, exact bag membership,
+and `summary.json` with counts, bag sizes, seed, and duplicate-row count. Use
+`--bag-size`, `--passes`, and `--seed` to mirror a non-default run.
+
 Bagging is `create_correct_only_bags(cover_all=True)` in
 [src/run_infer_misc_multi.py](src/run_infer_misc_multi.py) — the unaltered
 McMiner path, driven by `--correct-bags-only --correct-bags-cover-all`. It
